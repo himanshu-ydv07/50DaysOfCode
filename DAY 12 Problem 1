@@ -1,0 +1,25 @@
+Link:https://leetcode.com/problems/insert-greatest-common-divisors-in-linked-list/submissions/1630961376/
+class Solution {
+public:
+int gcd(int a, int b) {
+        while (b != 0) {
+            int tmp = b;
+            b = a % b;
+            a = tmp;
+        }
+        return a;
+    }
+    ListNode* insertGreatestCommonDivisors(ListNode* head) {
+        ListNode* current = head;
+        
+        while (current && current->next) {
+            int g = gcd(current->val, current->next->val);
+            ListNode* newNode = new ListNode(g);
+            newNode->next = current->next;
+            current->next = newNode;
+            current = newNode->next; 
+        }
+        
+        return head;
+    }
+};
