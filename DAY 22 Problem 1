@@ -1,0 +1,33 @@
+link: https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/submissions/1640399003/
+class Solution {
+public:
+    string minRemoveToMakeValid(string s) {
+        stack<int> st;
+        unordered_set<int> indexesToRemove;
+
+    
+    for (int i = 0; i < s.length(); ++i) {
+        if (s[i] == '(') {
+            st.push(i); 
+        } else if (s[i] == ')') {
+            if (!st.empty()) {
+                st.pop(); 
+            } else {
+                indexesToRemove.insert(i); 
+            }
+        }
+    }
+    while (!st.empty()) {
+        indexesToRemove.insert(st.top());
+        st.pop();
+    }
+    string result;
+    for (int i = 0; i < s.length(); ++i) {
+        if (indexesToRemove.find(i) == indexesToRemove.end()) {
+            result += s[i];
+        }
+    }
+
+    return result;
+    }
+};
