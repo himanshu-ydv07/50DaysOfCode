@@ -1,0 +1,26 @@
+link: https://leetcode.com/problems/find-first-palindromic-string-in-the-array/submissions/1654814083/
+class Solution {
+public:
+bool isPalindrome(const string& str) {
+    int left = 0;
+    int right = str.length() - 1;
+    
+    while (left < right) {
+        if (str[left] != str[right])
+            return false;
+        ++left;
+        --right;
+    }
+    return true;
+}
+
+
+    string firstPalindrome(vector<string>& words) {
+    for (const string& word : words) {
+        if (isPalindrome(word))
+            return word;
+    }
+    return "";
+    }
+   
+};
